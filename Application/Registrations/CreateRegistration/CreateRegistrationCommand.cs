@@ -1,0 +1,17 @@
+﻿
+using Application.Abstractions.Messaging;
+using Domain.Common;
+using Domain.Enums;
+
+namespace Application.Registrations.CreateRegistration;
+
+public sealed record CreateRegistrationCommand(
+    string ParticipantName,
+    string ContactNumber,
+    string Email,
+    string Address,
+    string CarMakeModel,
+    string PlateNumber,
+    RegistrationType RegistrationType,
+    decimal AmountPaid
+) : ICommand<Result<RegistrationResponse>>;
