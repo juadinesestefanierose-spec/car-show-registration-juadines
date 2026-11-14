@@ -1,11 +1,12 @@
+using Api.Endpoints.Registrations;
 using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Application.Registrations.CreateRegistration;
+using Application.Registrations.GetRegistrations;
 using Domain.Common;
 using FluentValidation;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Api.Endpoints.Registrations;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,11 @@ builder.Services.AddValidatorsFromAssembly(typeof(IAppDbContext).Assembly);
 builder.Services.AddScoped<
     ICommandHandler<CreateRegistrationCommand, Result<RegistrationResponse>>,
     CreateRegistrationCommandHandler>();
+builder.Services.AddScoped<GetRegistrationsQueryHandler>();
+builder.Services.AddScoped<
+    IQueryHandler<GetRegistrationsQuery,
+        Result<GetRegistrationsResponse>>,
+    GetRegistrationsQueryHandler>();
 // builder.Services.AddScoped<ICommandHandler<TCommand, Result<TResponse>>, TCommandHandler>();
 // builder.Services.AddScoped<IQueryHandler<TQuery, Result<TResponse>>, TQueryHandler>();
 
