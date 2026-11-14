@@ -9,6 +9,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using Application.Registrations.GetRegistrationById;
+using Application.Registrations.GetRegistrationSummary;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,7 @@ builder.Services.AddScoped< IQueryHandler<GetRegistrationsQuery, Result<GetRegis
 //builder.Services.AddScoped<ICommandHandler<TCommand, Result<TResponse>>, TCommandHandler>();
 // builder.Services.AddScoped<IQueryHandler<TQuery, Result<TResponse>>, TQueryHandler>();
 builder.Services.AddScoped< IQueryHandler<GetRegistrationByIdQuery,  Result<RegistrationResponse>>,GetRegistrationByIdQueryHandler>();
+builder.Services.AddScoped< IQueryHandler<GetRegistrationSummaryQuery, Result<GetRegistrationSummaryResponse>>, GetRegistrationSummaryQueryHandler>();
 
 // API
 builder.Services.AddEndpointsApiExplorer();

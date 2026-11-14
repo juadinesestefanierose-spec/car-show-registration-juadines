@@ -6,6 +6,7 @@ using Application.Registrations.GetRegistrations;
 using Domain.Common;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Application.Registrations.GetRegistrationSummary;
 
 namespace Api.Endpoints.Registrations;
 
@@ -97,6 +98,22 @@ public static class RegistrationEndpoints
             return Results.Ok(result.Value);
         })
         .WithName("GetRegistrationById")
+        .WithTags("Registrations");
+
+        // GET Registration Summary
+        app.MapGet("/api/registrations/summary", async (
+            [FromServices] IQueryHandler<GetRegistrationSummaryQuery,
+        Result<GetRegistrationSummaryResponse>> handler,
+            CancellationToken cancellationToken) =>
+        {
+            var query = new GetRegistrationSummaryQuery();
+
+            var result = await handler.HandleAsync(
+                query, cancellationToken);
+
+            return Results.Ok(result.Value);
+        })
+        .WithName("GetRegistrationSummary")
         .WithTags("Registrations");
 
         return app;
