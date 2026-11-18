@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Application.Registrations.GetRegistrations;
+namespace Application.Features.Registrations.GetRegistrations;
 
 public sealed class GetRegistrationsQueryValidator
     : AbstractValidator<GetRegistrationsQuery>
@@ -12,7 +12,8 @@ public sealed class GetRegistrationsQueryValidator
             .When(x => !string.IsNullOrWhiteSpace(x.ParticipantName));
 
         RuleFor(x => x.Page)
-            .GreaterThanOrEqualTo(1);
+            .GreaterThanOrEqualTo(1)
+            .WithMessage("Page must be at least 1."); 
 
         RuleFor(x => x.PageSize)
             .InclusiveBetween(1, 50);

@@ -1,7 +1,6 @@
-﻿
-using Application.Registrations.CreateRegistration;
+﻿using Application.Features.Registrations.CreateRegistration;
 
-namespace Application.Registrations.GetRegistrations;
+namespace Application.Features.Registrations.GetRegistrations;
 
 public sealed record GetRegistrationsResponse(
     IReadOnlyList<RegistrationResponse> Items,

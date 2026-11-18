@@ -1,9 +1,8 @@
-﻿
-using Application.Abstractions.Messaging;
+﻿using Application.Abstractions.Messaging;
 using Domain.Common;
 using Domain.Enums;
 
-namespace Application.Registrations.GetRegistrations;
+namespace Application.Features.Registrations.GetRegistrations;
 
 public sealed record GetRegistrationsQuery(
     RegistrationType? RegistrationType,

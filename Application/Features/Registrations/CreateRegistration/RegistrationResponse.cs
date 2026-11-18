@@ -1,7 +1,6 @@
-﻿
-using Domain.Enums;
+﻿using Domain.Enums;
 
-namespace Application.Registrations.CreateRegistration;
+namespace Application.Features.Registrations.CreateRegistration;
 
 public sealed record RegistrationResponse(
     Guid Id,

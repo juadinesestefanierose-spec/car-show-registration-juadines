@@ -1,10 +1,10 @@
 ﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Application.Registrations.CreateRegistration;
+using Application.Features.Registrations.CreateRegistration;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Registrations.GetRegistrationById;
+namespace Application.Features.Registrations.GetRegistrationById;
 
 public sealed class GetRegistrationByIdQueryHandler
     : IQueryHandler<GetRegistrationByIdQuery,

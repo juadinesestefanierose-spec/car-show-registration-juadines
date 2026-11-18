@@ -1,15 +1,15 @@
 using Api.Endpoints.Registrations;
 using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Application.Registrations.CreateRegistration;
-using Application.Registrations.GetRegistrations;
 using Domain.Common;
 using FluentValidation;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
-using Application.Registrations.GetRegistrationById;
-using Application.Registrations.GetRegistrationSummary;
+using Application.Features.Registrations.CreateRegistration;
+using Application.Features.Registrations.GetRegistrationById;
+using Application.Features.Registrations.GetRegistrations;
+using Application.Features.Registrations.GetRegistrationSummary;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite( builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=carshow.db"));
 builder.Services.AddScoped<IAppDbContext>(sp =>sp.GetRequiredService<AppDbContext>());
 // Validators
-builder.Services.AddValidatorsFromAssembly(typeof(IAppDbContext).Assembly);
+builder.Services.AddValidatorsFromAssembly(
+    typeof(GetRegistrationsQueryValidator).Assembly);
 
 // Handlers
 builder.Services.AddScoped<ICommandHandler<CreateRegistrationCommand, Result<RegistrationResponse>>, CreateRegistrationCommandHandler>();

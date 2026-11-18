@@ -1,4 +1,4 @@
-﻿namespace Application.Registrations.GetRegistrationSummary;
+﻿namespace Application.Features.Registrations.GetRegistrationSummary;
 
 public sealed record GetRegistrationSummaryResponse(
     int TotalRegistrations,

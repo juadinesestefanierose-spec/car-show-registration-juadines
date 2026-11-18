@@ -1,9 +1,8 @@
-﻿
-using Application.Abstractions.Messaging;
+﻿using Application.Abstractions.Messaging;
 using Domain.Common;
 using Domain.Enums;
 
-namespace Application.Registrations.CreateRegistration;
+namespace Application.Features.Registrations.CreateRegistration;
 
 public sealed record CreateRegistrationCommand(
     string ParticipantName,

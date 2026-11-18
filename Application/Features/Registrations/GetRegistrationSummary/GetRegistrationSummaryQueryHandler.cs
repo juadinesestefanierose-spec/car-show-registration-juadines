@@ -4,7 +4,7 @@ using Domain.Common;
 using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Registrations.GetRegistrationSummary;
+namespace Application.Features.Registrations.GetRegistrationSummary;
 
 public sealed class GetRegistrationSummaryQueryHandler
     : IQueryHandler<GetRegistrationSummaryQuery,

@@ -1,7 +1,6 @@
-﻿
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Application.Registrations.CreateRegistration;
+namespace Application.Features.Registrations.CreateRegistration;
 
 public sealed class CreateRegistrationCommandValidator
     : AbstractValidator<CreateRegistrationCommand>

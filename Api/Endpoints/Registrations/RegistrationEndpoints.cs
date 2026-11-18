@@ -1,12 +1,13 @@
 ﻿
 using Application.Abstractions.Messaging;
-using Application.Registrations.CreateRegistration;
-using Application.Registrations.GetRegistrationById;
-using Application.Registrations.GetRegistrations;
+using Application.Features.Registrations.CreateRegistration;
+using Application.Features.Registrations.GetRegistrationById;
+using Application.Features.Registrations.GetRegistrations;
+using Application.Features.Registrations.GetRegistrationSummary;
 using Domain.Common;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
-using Application.Registrations.GetRegistrationSummary;
 
 namespace Api.Endpoints.Registrations;
 
@@ -54,9 +55,24 @@ public static class RegistrationEndpoints
         app.MapGet("/api/registrations", async (
             [AsParameters] GetRegistrationsQuery query,
             [FromServices] IQueryHandler<GetRegistrationsQuery,
-                Result<GetRegistrationsResponse>> handler,
+        Result<GetRegistrationsResponse>> handler,
+            [FromServices] IValidator<GetRegistrationsQuery> validator,
             CancellationToken cancellationToken) =>
         {
+            var validationResult = await validator.ValidateAsync(
+                query, cancellationToken);
+
+            if (!validationResult.IsValid)
+            {
+                var errors = validationResult.Errors
+                    .GroupBy(e => e.PropertyName)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(e => e.ErrorMessage).ToArray());
+
+                return Results.ValidationProblem(errors);
+            }
+
             var result = await handler.HandleAsync(
                 query, cancellationToken);
 
@@ -73,7 +89,6 @@ public static class RegistrationEndpoints
         })
         .WithName("GetRegistrations")
         .WithTags("Registrations");
-
         // GET REGISTRATION BY ID
         app.MapGet("/api/registrations/{id:guid}", async (
             Guid id,

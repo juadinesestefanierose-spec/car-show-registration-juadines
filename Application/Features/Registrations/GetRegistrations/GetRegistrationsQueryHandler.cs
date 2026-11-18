@@ -1,11 +1,10 @@
-﻿
-using Application.Abstractions.Data;
+﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
-using Application.Registrations.CreateRegistration;
+using Application.Features.Registrations.CreateRegistration;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Registrations.GetRegistrations;
+namespace Application.Features.Registrations.GetRegistrations;
 
 public sealed class GetRegistrationsQueryHandler
     : IQueryHandler<GetRegistrationsQuery, Result<GetRegistrationsResponse>>

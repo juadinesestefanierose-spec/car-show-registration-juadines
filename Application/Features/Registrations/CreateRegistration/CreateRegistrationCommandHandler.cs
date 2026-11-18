@@ -1,5 +1,4 @@
-﻿
-using Application.Abstractions.Data;
+﻿using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Domain.Common;
 using Domain.Entities;
@@ -7,7 +6,7 @@ using Domain.Enums;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Registrations.CreateRegistration;
+namespace Application.Features.Registrations.CreateRegistration;
 
 public sealed class CreateRegistrationCommandHandler
     : ICommandHandler<CreateRegistrationCommand, Result<RegistrationResponse>>
