@@ -1,0 +1,11 @@
+Frontend/node_modules/
+Frontend/dist/
+
+Backend/**/bin/
+Backend/**/obj/
+Backend/.vs/
+Backend/**/*.db
+Backend/**/appsettings.Development.json
+
+Frontend/.env.local
+Frontend/.env.*.local
