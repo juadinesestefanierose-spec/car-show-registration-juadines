@@ -1,121 +1,121 @@
+
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
+type Registration = {
+  id: number
+  registrationNumber: string
+  participantName: string
+  carMakeModel: string
+  registrationType: string
+  status: string
+  paymentStatus: string
+}
+
+const sampleRegistrations: Registration[] = [
+  { id: 1, registrationNumber: 'CSR-2026-001', participantName: 'Juan Dela Cruz', carMakeModel: 'Toyota Vios', registrationType: 'Car Show', status: 'Confirmed', paymentStatus: 'Paid' },
+  { id: 2, registrationNumber: 'CSR-2026-002', participantName: 'Maria Santos', carMakeModel: 'Honda Civic', registrationType: 'Car Show', status: 'Pending', paymentStatus: 'Unpaid' },
+  { id: 3, registrationNumber: 'CSR-2026-003', participantName: 'Pedro Reyes', carMakeModel: 'Mitsubishi Lancer', registrationType: 'Car Meet', status: 'Checked In', paymentStatus: 'Paid' },
+  { id: 4, registrationNumber: 'CSR-2026-004', participantName: 'Ana Garcia', carMakeModel: 'Nissan GT-R', registrationType: 'Car Show', status: 'Confirmed', paymentStatus: 'Paid' },
+  { id: 5, registrationNumber: 'CSR-2026-005', participantName: 'Mark Lopez', carMakeModel: 'Subaru WRX', registrationType: 'Car Meet', status: 'Cancelled', paymentStatus: 'Unpaid' },
+  { id: 6, registrationNumber: 'CSR-2026-006', participantName: 'Sofia Ramos', carMakeModel: 'Mazda 3', registrationType: 'Car Show', status: 'Pending', paymentStatus: 'Partial' },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [search, setSearch] = useState('')
+
+  const filteredRegistrations = sampleRegistrations.filter((registration) =>
+    registration.participantName.toLowerCase().includes(search.toLowerCase()) ||
+    registration.registrationNumber.toLowerCase().includes(search.toLowerCase())
+  )
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <main className="dashboard">
+      <header className="dashboard-header">
         <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
+          <p className="eyebrow">CAR SHOW MANAGEMENT</p>
+          <h1>Registration Dashboard</h1>
+          <p className="subtitle">Manage and monitor car show registrations.</p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+        <button className="add-button">+ New Registration</button>
+      </header>
+
+      <section className="stats-grid">
+        <article className="stat-card">
+          <p>Total Registrations</p>
+          <h2>32</h2>
+        </article>
+        <article className="stat-card">
+          <p>Pending</p>
+          <h2>14</h2>
+        </article>
+        <article className="stat-card">
+          <p>Confirmed</p>
+          <h2>6</h2>
+        </article>
+        <article className="stat-card">
+          <p>Checked In</p>
+          <h2>6</h2>
+        </article>
+        <article className="stat-card">
+          <p>Cancelled</p>
+          <h2>6</h2>
+        </article>
       </section>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <section className="registrations-section">
+        <div className="section-header">
+          <div>
+            <h2>Recent Registrations</h2>
+            <p>View and manage participant registrations.</p>
+          </div>
+          <input
+            type="text"
+            placeholder="Search participant or registration..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Registration No.</th>
+                <th>Participant</th>
+                <th>Car Model</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Payment</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredRegistrations.map((registration) => (
+                <tr key={registration.id}>
+                  <td>{registration.registrationNumber}</td>
+                  <td>{registration.participantName}</td>
+                  <td>{registration.carMakeModel}</td>
+                  <td>{registration.registrationType}</td>
+                  <td>
+                    <span className={`status ${registration.status.toLowerCase().replace(' ', '-')}`}>
+                      {registration.status}
+                    </span>
+                  </td>
+                  <td>{registration.paymentStatus}</td>
+                </tr>
+              ))}
+              {filteredRegistrations.length === 0 && (
+                <tr>
+                  <td colSpan={6} className="empty-message">
+                    No registrations found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </main>
   )
 }
 
